@@ -1,20 +1,20 @@
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.9.10"
-    id("org.jetbrains.intellij") version "1.15.0"
+    id("org.jetbrains.kotlin.jvm") version "1.9.25"
+    id("org.jetbrains.intellij") version "1.17.3"
 }
 
 group = "com.example"
-version = "1.0.0"
+version = "1.1.0"
 
 repositories {
     mavenCentral()
 }
 
 intellij {
-    version.set("2023.2")
-    type.set("IC") // IntelliJ IDEA Community Edition
-    plugins.set(listOf("java"))
+    version.set("2024.3")
+    type.set("IC") // IntelliJ IDEA Community Edition (compatible with WebStorm)
+    plugins.set(listOf())
 }
 
 tasks {
@@ -27,8 +27,8 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("232")
-        untilBuild.set("242.*")
+        sinceBuild.set("252")
+        untilBuild.set("252.*")
     }
 
     signPlugin {

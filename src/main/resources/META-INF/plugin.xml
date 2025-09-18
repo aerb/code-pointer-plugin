@@ -5,15 +5,22 @@
 
     <description><![CDATA[
     This plugin copies a file reference with line numbers to the clipboard for selected text.
+    Compatible with IntelliJ IDEA and WebStorm.
     
     Features:
     - Copies file path with line numbers (e.g., "src/main/MyFile.java:4-10")
     - Works with any file type
     - Uses relative paths from project root
     - Simple and lightweight
+    - Supports both IntelliJ IDEA and WebStorm
     ]]></description>
 
     <change-notes><![CDATA[
+    Version 1.1.0:
+    - Added WebStorm compatibility (WS-252.25557.126+)
+    - Updated to support IntelliJ IDEA 2024.3+
+    - Updated to Java 17 and Kotlin 1.9.25
+    
     Version 1.0.0:
     - Initial release
     - Copy file reference with line numbers to clipboard
@@ -22,7 +29,9 @@
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
          on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
-    <depends>com.intellij.modules.java</depends>
+    
+    <!-- WebStorm compatibility -->
+    <depends optional="true" config-file="webstorm-compatibility.xml">com.intellij.modules.webstorm</depends>
 
     <actions>
         <!-- Add your actions here -->

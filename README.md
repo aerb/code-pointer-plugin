@@ -1,11 +1,11 @@
 # Copy Selection Reference - IntelliJ Plugin
 
-This IntelliJ plugin copies a file reference with line numbers to the clipboard for selected text. Perfect for sharing code locations with team members or referencing specific lines in documentation.
+This IntelliJ plugin copies a file reference with line numbers to the clipboard for selected text. Perfect for sharing code locations with team members or referencing specific lines in documentation. Compatible with IntelliJ IDEA and WebStorm.
 
 ## Features
 
 - **Simple File Reference**: Copies file path with line numbers (e.g., "src/main/MyFile.java:4-10")
-- **Works with Any File Type**: Supports all file types in IntelliJ IDEA
+- **Works with Any File Type**: Supports all file types in IntelliJ IDEA and WebStorm
 - **Relative Paths**: Uses relative paths from project root for cleaner references
 - **Single Line Support**: Shows single line numbers when selection is on one line
 - **Multi-line Support**: Shows line ranges when selection spans multiple lines
@@ -15,15 +15,15 @@ This IntelliJ plugin copies a file reference with line numbers to the clipboard 
 ### Development Setup
 
 1. Clone this repository
-2. Open the project in IntelliJ IDEA
+2. Open the project in IntelliJ IDEA or WebStorm
 3. Run `./gradlew buildPlugin` to build the plugin
-4. Run `./gradlew runIde` to test the plugin in a sandbox IntelliJ instance
+4. Run `./gradlew runIde` to test the plugin in a sandbox IDE instance
 
 ### Production Installation
 
 1. Build the plugin: `./gradlew buildPlugin`
-2. Install the generated `.zip` file from `build/distributions/` in IntelliJ IDEA
-3. Go to `File > Settings > Plugins > Installed` and enable "Selection Lint Reporter"
+2. Install the generated `.zip` file from `build/distributions/` in IntelliJ IDEA or WebStorm
+3. Go to `File > Settings > Plugins > Installed` and enable "Copy Selection Reference"
 
 ## Usage
 
@@ -99,10 +99,11 @@ src/main/
 
 ## Compatibility
 
-- **IntelliJ IDEA**: 2023.2 and later
+- **IntelliJ IDEA**: 2024.3 and later
+- **WebStorm**: WS-252.25557.126 and later
 - **Java**: 17+
-- **Kotlin**: 1.9.10+
-- **Supported Languages**: Java (primary), with extensibility for other languages
+- **Kotlin**: 1.9.25+
+- **Supported Languages**: All file types supported by IntelliJ IDEA and WebStorm (no Java dependency required)
 
 ## Contributing
 
