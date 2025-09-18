@@ -1,21 +1,22 @@
 <idea-plugin>
     <id>com.example.selection-plugin</id>
-    <name>Selection Lint Reporter</name>
+    <name>Copy Selection Reference</name>
     <vendor email="support@example.com" url="https://example.com">Example</vendor>
 
     <description><![CDATA[
-    This plugin reports lint positions of highlighted/selected text in IntelliJ IDEA.
+    This plugin copies a file reference with line numbers to the clipboard for selected text.
     
     Features:
-    - Detects lint issues in selected text
-    - Reports positions of lint warnings and errors
-    - Shows detailed information about lint problems
+    - Copies file path with line numbers (e.g., "src/main/MyFile.java:4-10")
+    - Works with any file type
+    - Uses relative paths from project root
+    - Simple and lightweight
     ]]></description>
 
     <change-notes><![CDATA[
     Version 1.0.0:
     - Initial release
-    - Basic lint position reporting functionality
+    - Copy file reference with line numbers to clipboard
     ]]></change-notes>
 
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
@@ -23,24 +24,12 @@
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.java</depends>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
-        <localInspection language="JAVA" 
-                        shortName="SelectionLint" 
-                        displayName="Selection Lint Analysis" 
-                        groupName="Code Style Issues" 
-                        groupPath="Java" 
-                        enabledByDefault="true" 
-                        level="WARNING" 
-                        implementationClass="com.example.selectionplugin.SelectionLintInspector"/>
-    </extensions>
-
     <actions>
         <!-- Add your actions here -->
-        <action id="ReportLintPositions" class="com.example.selectionplugin.ReportLintPositionsAction" 
-                text="Report Lint Positions" description="Reports lint positions of selected text">
+        <action id="CopySelectionReference" class="com.example.selectionplugin.CopySelectionReferenceAction" 
+                text="Copy Selection Reference" description="Copies file reference with line numbers to clipboard">
             <add-to-group group-id="EditMenu" anchor="last"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt L"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt R"/>
         </action>
     </actions>
 </idea-plugin>
