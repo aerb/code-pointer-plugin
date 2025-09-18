@@ -1,0 +1,46 @@
+<idea-plugin>
+    <id>com.example.selection-plugin</id>
+    <name>Selection Lint Reporter</name>
+    <vendor email="support@example.com" url="https://example.com">Example</vendor>
+
+    <description><![CDATA[
+    This plugin reports lint positions of highlighted/selected text in IntelliJ IDEA.
+    
+    Features:
+    - Detects lint issues in selected text
+    - Reports positions of lint warnings and errors
+    - Shows detailed information about lint problems
+    ]]></description>
+
+    <change-notes><![CDATA[
+    Version 1.0.0:
+    - Initial release
+    - Basic lint position reporting functionality
+    ]]></change-notes>
+
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <localInspection language="JAVA" 
+                        shortName="SelectionLint" 
+                        displayName="Selection Lint Analysis" 
+                        groupName="Code Style Issues" 
+                        groupPath="Java" 
+                        enabledByDefault="true" 
+                        level="WARNING" 
+                        implementationClass="com.example.selectionplugin.SelectionLintInspector"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="ReportLintPositions" class="com.example.selectionplugin.ReportLintPositionsAction" 
+                text="Report Lint Positions" description="Reports lint positions of selected text">
+            <add-to-group group-id="EditMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt L"/>
+        </action>
+    </actions>
+</idea-plugin>
