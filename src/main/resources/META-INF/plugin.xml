@@ -1,14 +1,15 @@
 <idea-plugin>
-    <id>com.example.selection-plugin</id>
-    <name>Copy Selection Reference</name>
-    <vendor email="support@example.com" url="https://example.com">Example</vendor>
+    <id>ca.aerb.coderef-plugin</id>
+    <name>CodeRef</name>
+    <vendor email="adam.l.erb@gmail.com">Adam Erb</vendor>
 
     <description><![CDATA[
-    This plugin copies a file reference with line numbers to the clipboard for selected text.
+    This plugin copies a file reference with line and column numbers to the clipboard for selected text or cursor position.
     Compatible with IntelliJ IDEA and WebStorm.
-    
+
     Features:
-    - Copies file path with line numbers (e.g., "src/main/MyFile.java:4-10")
+    - Copies file path with line and column numbers for selections (e.g., "src/main/MyFile.java:4:10-10:25")
+    - Copies cursor position when no selection (e.g., "src/main/MyFile.java:4:10")
     - Works with any file type
     - Uses relative paths from project root
     - Simple and lightweight
@@ -16,11 +17,16 @@
     ]]></description>
 
     <change-notes><![CDATA[
+    Version 1.2.0:
+    - Added column numbers to copied references (e.g., "file.kt:10:5-20:15")
+    - Now copies cursor position when no text is selected (e.g., "file.kt:10:5")
+    - Improved precision for code location references
+
     Version 1.1.0:
     - Added WebStorm compatibility (WS-252.25557.126+)
     - Updated to support IntelliJ IDEA 2024.3+
     - Updated to Java 17 and Kotlin 1.9.25
-    
+
     Version 1.0.0:
     - Initial release
     - Copy file reference with line numbers to clipboard
@@ -29,13 +35,13 @@
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
          on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
-    
+
     <!-- WebStorm compatibility -->
     <depends optional="true" config-file="webstorm-compatibility.xml">com.intellij.modules.webstorm</depends>
 
     <actions>
         <!-- Add your actions here -->
-        <action id="CopySelectionReference" class="com.example.selectionplugin.CopySelectionReferenceAction" 
+        <action id="CopySelectionReference" class="com.example.selectionplugin.CopySelectionReferenceAction"
                 text="Copy Selection Reference" description="Copies file reference with line numbers to clipboard">
             <add-to-group group-id="EditMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt R"/>
