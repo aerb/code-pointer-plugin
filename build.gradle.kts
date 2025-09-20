@@ -4,6 +4,10 @@ plugins {
   id("org.jetbrains.intellij") version "1.17.3"
 }
 
+dependencies {
+
+}
+
 group = "com.example"
 version = "1.2.0"
 
@@ -25,6 +29,19 @@ tasks {
   withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions.jvmTarget = "17"
   }
+
+  test {
+    useJUnitPlatform()
+    testLogging {
+      events("passed", "skipped", "failed")
+    }
+    // Try to run tests without IntelliJ plugin framework
+    systemProperty("idea.test.mode", "true")
+    systemProperty("idea.platform.prefix", "Idea")
+    systemProperty("java.awt.headless", "true")
+    jvmArgs("-Didea.test.mode=true")
+  }
+
 
   patchPluginXml {
     sinceBuild.set("252")

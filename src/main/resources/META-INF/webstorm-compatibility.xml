@@ -1,4 +1,0 @@
-<idea-plugin>
-    <!-- WebStorm-specific configuration -->
-    <depends>com.intellij.modules.webstorm</depends>
-</idea-plugin>

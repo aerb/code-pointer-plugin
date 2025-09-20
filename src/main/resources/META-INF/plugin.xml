@@ -1,50 +1,49 @@
 <idea-plugin>
-    <id>ca.aerb.coderef-plugin</id>
-    <name>CodeRef</name>
-    <vendor email="adam.l.erb@gmail.com">Adam Erb</vendor>
+  <id>ca.aerb.codeptr-plugin</id>
+  <name>Code Pointers</name>
+  <vendor email="adam.l.erb@gmail.com">Adam Erb</vendor>
 
-    <description><![CDATA[
-    This plugin copies a file reference with line and column numbers to the clipboard for selected text or cursor position.
+  <description><![CDATA[
+    Copy Selection Reference - IntelliJ Plugin
+    
+    This IntelliJ plugin copies a file reference with line numbers to the clipboard for selected text. 
+    Perfect for sharing code locations with team members or referencing specific lines in documentation. 
     Compatible with IntelliJ IDEA and WebStorm.
-
+    
     Features:
-    - Copies file path with line and column numbers for selections (e.g., "src/main/MyFile.java:4:10-10:25")
-    - Copies cursor position when no selection (e.g., "src/main/MyFile.java:4:10")
+    - Configurable path reference modes (Project Root, Git Root, Absolute Path)
+    - Optional column number inclusion
     - Works with any file type
-    - Uses relative paths from project root
-    - Simple and lightweight
-    - Supports both IntelliJ IDEA and WebStorm
-    ]]></description>
-
-    <change-notes><![CDATA[
-    Version 1.2.0:
-    - Added column numbers to copied references (e.g., "file.kt:10:5-20:15")
-    - Now copies cursor position when no text is selected (e.g., "file.kt:10:5")
-    - Improved precision for code location references
-
-    Version 1.1.0:
-    - Added WebStorm compatibility (WS-252.25557.126+)
-    - Updated to support IntelliJ IDEA 2024.3+
-    - Updated to Java 17 and Kotlin 1.9.25
-
-    Version 1.0.0:
-    - Initial release
-    - Copy file reference with line numbers to clipboard
-    ]]></change-notes>
-
-    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
-         on how to target different products -->
-    <depends>com.intellij.modules.platform</depends>
-
-    <!-- WebStorm compatibility -->
-    <depends optional="true" config-file="webstorm-compatibility.xml">com.intellij.modules.webstorm</depends>
-
-    <actions>
-        <!-- Add your actions here -->
-        <action id="CopySelectionReference" class="com.example.selectionplugin.CopySelectionReferenceAction"
-                text="Copy Selection Reference" description="Copies file reference with line numbers to clipboard">
-            <add-to-group group-id="EditMenu" anchor="last"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt R"/>
-        </action>
-    </actions>
+    - Simple and intuitive interface
+  ]]></description>
+  <change-notes><![CDATA[
+    Version 1.3.0:
+    - Added configurable path reference modes (Project Root, Git Root, Absolute Path)
+    - Added option to include/exclude column numbers
+    - Added settings UI accessible through File > Settings > Code Pointers
+    - Improved path resolution for git repositories
+    - Enhanced reference format flexibility
+  ]]></change-notes>
+  <depends>com.intellij.modules.platform</depends>
+  
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationConfigurable 
+      parentId="tools" 
+      instance="ca.aerb.codeptr.CodePointerSettingsConfigurable"
+      id="ca.aerb.codeptr.settings"
+      displayName="Code Pointers"
+    />
+  </extensions>
+  
+  <actions>
+    <action
+      id="CopyCodePointerAction"
+      class="ca.aerb.codeptr.CopyCodePointerAction"
+      text="Copy Code Pointer"
+      description="Copy code pointer to clipboard"
+    >
+      <add-to-group group-id="EditMenu" anchor="last"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="command shift C"/>
+    </action>
+  </actions>
 </idea-plugin>
