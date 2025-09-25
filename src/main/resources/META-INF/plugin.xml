@@ -5,11 +5,11 @@
 
   <description><![CDATA[
     Copy Selection Reference - IntelliJ Plugin
-    
-    This IntelliJ plugin copies a file reference with line numbers to the clipboard for selected text. 
-    Perfect for sharing code locations with team members or referencing specific lines in documentation. 
+
+    This IntelliJ plugin copies a file reference with line numbers to the clipboard for selected text.
+    Perfect for sharing code locations with team members or referencing specific lines in documentation.
     Compatible with IntelliJ IDEA and WebStorm.
-    
+
     Features:
     - Configurable path reference modes (Project Root, Git Root, Absolute Path)
     - Optional column number inclusion
@@ -25,16 +25,16 @@
     - Enhanced reference format flexibility
   ]]></change-notes>
   <depends>com.intellij.modules.platform</depends>
-  
+
   <extensions defaultExtensionNs="com.intellij">
-    <applicationConfigurable 
-      parentId="tools" 
+    <applicationConfigurable
+      parentId="tools"
       instance="ca.aerb.codeptr.CodePointerSettingsConfigurable"
       id="ca.aerb.codeptr.settings"
       displayName="Code Pointers"
     />
   </extensions>
-  
+
   <actions>
     <action
       id="CopyCodePointerAction"
@@ -43,7 +43,7 @@
       description="Copy code pointer to clipboard"
     >
       <add-to-group group-id="EditMenu" anchor="last"/>
-      <keyboard-shortcut keymap="$default" first-keystroke="command shift C"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="meta shift C"/>
     </action>
   </actions>
 </idea-plugin>

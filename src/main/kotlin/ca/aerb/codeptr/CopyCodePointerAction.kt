@@ -8,7 +8,6 @@ import com.intellij.openapi.ide.CopyPasteManager
 import java.awt.datatransfer.StringSelection
 
 class CopyCodePointerAction : AnAction() {
-
   override fun getActionUpdateThread(): ActionUpdateThread = ActionUpdateThread.EDT
 
   override fun actionPerformed(e: AnActionEvent) {
@@ -48,21 +47,21 @@ class CopyCodePointerAction : AnAction() {
     val filePath = PathResolver.resolvePath(project, virtualFile, pathReferenceMode)
 
     // Generate reference based on settings
-    val reference = generateReference(filePath, startLine, endLine, startColumn, endColumn, includeColumnNumbers)
+    val reference =
+        generateReference(
+            filePath, startLine, endLine, startColumn, endColumn, includeColumnNumbers)
 
     CopyPasteManager.getInstance().setContents(StringSelection(reference))
   }
 
-  /**
-   * Generates the code pointer reference string based on the provided parameters.
-   */
+  /** Generates the code pointer reference string based on the provided parameters. */
   private fun generateReference(
-    filePath: String,
-    startLine: Int,
-    endLine: Int,
-    startColumn: Int,
-    endColumn: Int,
-    includeColumnNumbers: Boolean
+      filePath: String,
+      startLine: Int,
+      endLine: Int,
+      startColumn: Int,
+      endColumn: Int,
+      includeColumnNumbers: Boolean,
   ): String {
     return when {
       startLine == endLine && (!includeColumnNumbers || startColumn == endColumn) -> {
@@ -93,9 +92,6 @@ class CopyCodePointerAction : AnAction() {
     val editor = e.getData(CommonDataKeys.EDITOR)
     val virtualFile = e.getData(CommonDataKeys.VIRTUAL_FILE)
 
-    e.presentation.isEnabledAndVisible =
-      project != null &&
-        editor != null &&
-        virtualFile != null
+    e.presentation.isEnabledAndVisible = project != null && editor != null && virtualFile != null
   }
 }

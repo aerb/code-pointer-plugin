@@ -1,60 +1,32 @@
 plugins {
   id("java")
-  id("org.jetbrains.kotlin.jvm") version "1.9.25"
-  id("org.jetbrains.intellij") version "1.17.3"
+  id("org.jetbrains.kotlin.jvm") version "2.2.0"
+  id("org.jetbrains.intellij.platform") version "2.9.0"
+  id("com.ncorti.ktfmt.gradle") version "0.24.0"
 }
 
-dependencies {
-
+repositories {
+  mavenCentral()
+  intellijPlatform { defaultRepositories() }
 }
+
+dependencies { intellijPlatform { intellijIdeaCommunity("2025.2.2") } }
 
 group = "com.example"
+
 version = "1.2.0"
 
 repositories {
   mavenCentral()
-}
-
-intellij {
-  version.set("2024.3")
-  type.set("IC") // IntelliJ IDEA Community Edition (compatible with WebStorm)
-  plugins.set(listOf())
+  gradlePluginPortal()
 }
 
 tasks {
-  withType<JavaCompile> {
-    sourceCompatibility = "17"
-    targetCompatibility = "17"
-  }
-  withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
-  }
-
-  test {
-    useJUnitPlatform()
-    testLogging {
-      events("passed", "skipped", "failed")
-    }
-    // Try to run tests without IntelliJ plugin framework
-    systemProperty("idea.test.mode", "true")
-    systemProperty("idea.platform.prefix", "Idea")
-    systemProperty("java.awt.headless", "true")
-    jvmArgs("-Didea.test.mode=true")
-  }
-
-
-  patchPluginXml {
-    sinceBuild.set("252")
-    untilBuild.set("252.*")
-  }
-
   signPlugin {
     certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
     privateKey.set(System.getenv("PRIVATE_KEY"))
     password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
   }
 
-  publishPlugin {
-    token.set(System.getenv("PUBLISH_TOKEN"))
-  }
+  publishPlugin { token.set(System.getenv("PUBLISH_TOKEN")) }
 }
