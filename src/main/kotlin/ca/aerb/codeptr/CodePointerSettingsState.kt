@@ -8,15 +8,15 @@ import com.intellij.openapi.components.*
  * modes and other configuration options.
  */
 @State(
-  name = "CodePointerSettings",
-  storages = [Storage("code-pointer-settings.xml")],
+    name = "CodePointerSettings",
+    storages = [Storage("code-pointer-settings.xml")],
 )
 @Service
 class CodePointerSettingsState : PersistentStateComponent<CodePointerSettingsState.State> {
   data class State(
-    var pathReferenceMode: PathReferenceMode = PathReferenceMode.PROJECT_ROOT,
-    var includeColumnNumbers: Boolean = true,
-    var showPreviewInTooltip: Boolean = true,
+      var pathReferenceMode: PathReferenceMode = PathReferenceMode.PROJECT_ROOT,
+      var includeColumnNumbers: Boolean = true,
+      var showPreviewInTooltip: Boolean = true,
   )
 
   private var state = State()

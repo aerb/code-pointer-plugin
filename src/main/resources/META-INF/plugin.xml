@@ -18,6 +18,8 @@
   ]]></change-notes>
   <depends>com.intellij.modules.platform</depends>
 
+  <idea-version since-build="233.0"/>
+
   <extensions defaultExtensionNs="com.intellij">
     <applicationConfigurable
       parentId="tools"

@@ -1,14 +1,15 @@
 package ca.aerb.codeptr
 
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.SystemInfo
 import com.intellij.openapi.vfs.VirtualFile
 import java.io.File
 
 object PathResolver {
   fun resolvePath(
-    project: Project,
-    virtualFile: VirtualFile,
-    mode: PathReferenceMode,
+      project: Project,
+      virtualFile: VirtualFile,
+      mode: PathReferenceMode,
   ): String {
     return when (mode) {
       PathReferenceMode.PROJECT_ROOT -> resolveProjectRootPath(project, virtualFile)
@@ -18,8 +19,8 @@ object PathResolver {
   }
 
   private fun resolveProjectRootPath(
-    project: Project,
-    virtualFile: VirtualFile,
+      project: Project,
+      virtualFile: VirtualFile,
   ): String {
     val projectBasePath = project.basePath ?: return virtualFile.name
     val filePath = virtualFile.path
@@ -32,8 +33,8 @@ object PathResolver {
   }
 
   private fun resolveGitRootPath(
-    project: Project,
-    virtualFile: VirtualFile,
+      project: Project,
+      virtualFile: VirtualFile,
   ): String {
     return try {
       // Try to find git root using file system traversal
@@ -67,6 +68,18 @@ object PathResolver {
   }
 
   private fun resolveAbsolutePath(virtualFile: VirtualFile): String {
-    return virtualFile.path
+    return normalizePathSeparators(virtualFile.path)
+  }
+
+  /**
+   * Normalizes path separators for cross-platform compatibility. Ensures consistent path format
+   * across Windows, macOS, and Linux.
+   */
+  private fun normalizePathSeparators(path: String): String {
+    return if (SystemInfo.isWindows) {
+      path.replace('/', '\\')
+    } else {
+      path.replace('\\', '/')
+    }
   }
 }

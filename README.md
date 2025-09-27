@@ -99,11 +99,14 @@ src/main/
 
 ## Compatibility
 
-- **IntelliJ IDEA**: 2024.3 and later
-- **WebStorm**: WS-252.25557.126 and later
+- **IntelliJ IDEA**: 2023.3 and later (build 233.0+)
+- **WebStorm**: 2023.3 and later
+- **PyCharm**: 2023.3 and later
+- **Android Studio**: 2023.3 and later
+- **Other JetBrains IDEs**: Any IDE based on IntelliJ Platform 2023.3+
 - **Java**: 17+
 - **Kotlin**: 1.9.25+
-- **Supported Languages**: All file types supported by IntelliJ IDEA and WebStorm (no Java dependency required)
+- **Supported Languages**: All file types supported by the IDE (no language-specific dependencies required)
 
 ## Contributing
 

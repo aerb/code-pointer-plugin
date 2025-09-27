@@ -5,8 +5,6 @@ import com.intellij.ui.components.JBCheckBox
 import com.intellij.ui.components.JBLabel
 import com.intellij.util.ui.FormBuilder
 import javax.swing.JPanel
-import javax.swing.DefaultListCellRenderer
-import javax.swing.JList
 
 /**
  * Settings form using IntelliJ's built-in components and FormBuilder. This is the recommended

@@ -5,16 +5,18 @@ plugins {
   id("com.ncorti.ktfmt.gradle") version "0.24.0"
 }
 
+java { toolchain { languageVersion.set(JavaLanguageVersion.of(17)) } }
+
 repositories {
   mavenCentral()
   intellijPlatform { defaultRepositories() }
 }
 
-dependencies { intellijPlatform { intellijIdeaCommunity("2025.2.2") } }
+dependencies { intellijPlatform { intellijIdeaCommunity("2023.3.6") } }
 
 group = "ca.aerb"
 
-version = "0.5.0"
+version = "0.6.0"
 
 repositories {
   mavenCentral()
