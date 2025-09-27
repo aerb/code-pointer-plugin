@@ -4,20 +4,11 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import java.io.File
 
-/** Utility class for resolving file paths based on different reference modes. */
 object PathResolver {
-  /**
-   * Resolves the file path based on the specified reference mode.
-   *
-   * @param project The current project
-   * @param virtualFile The virtual file to get the path for
-   * @param mode The path reference mode to use
-   * @return The resolved file path string
-   */
   fun resolvePath(
-      project: Project,
-      virtualFile: VirtualFile,
-      mode: PathReferenceMode,
+    project: Project,
+    virtualFile: VirtualFile,
+    mode: PathReferenceMode,
   ): String {
     return when (mode) {
       PathReferenceMode.PROJECT_ROOT -> resolveProjectRootPath(project, virtualFile)
@@ -26,10 +17,9 @@ object PathResolver {
     }
   }
 
-  /** Resolves path relative to project root. */
   private fun resolveProjectRootPath(
-      project: Project,
-      virtualFile: VirtualFile,
+    project: Project,
+    virtualFile: VirtualFile,
   ): String {
     val projectBasePath = project.basePath ?: return virtualFile.name
     val filePath = virtualFile.path
@@ -41,13 +31,9 @@ object PathResolver {
     }
   }
 
-  /**
-   * Resolves path relative to git repository root. Falls back to project root if git is not
-   * available.
-   */
   private fun resolveGitRootPath(
-      project: Project,
-      virtualFile: VirtualFile,
+    project: Project,
+    virtualFile: VirtualFile,
   ): String {
     return try {
       // Try to find git root using file system traversal
@@ -69,7 +55,6 @@ object PathResolver {
     }
   }
 
-  /** Finds the git repository root by traversing up the directory tree. */
   private fun findGitRoot(filePath: String): String? {
     var currentDir = File(filePath).parentFile
     while (currentDir != null) {
@@ -81,7 +66,6 @@ object PathResolver {
     return null
   }
 
-  /** Resolves absolute file system path. */
   private fun resolveAbsolutePath(virtualFile: VirtualFile): String {
     return virtualFile.path
   }

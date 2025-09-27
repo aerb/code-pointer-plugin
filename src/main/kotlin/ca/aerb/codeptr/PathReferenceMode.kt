@@ -9,5 +9,11 @@ enum class PathReferenceMode {
   GIT_ROOT,
 
   /** Use absolute file system paths. Example: /Users/username/project/src/main/MyClass.java:5 */
-  ABSOLUTE_PATH,
+  ABSOLUTE_PATH, ;
+
+  override fun toString(): String = when (this) {
+    PROJECT_ROOT -> "Project Root"
+    GIT_ROOT -> "Git Root"
+    ABSOLUTE_PATH -> "Absolute Path"
+  }
 }

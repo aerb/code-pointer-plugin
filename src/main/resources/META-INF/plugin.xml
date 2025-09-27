@@ -4,25 +4,17 @@
   <vendor email="adam.l.erb@gmail.com">Adam Erb</vendor>
 
   <description><![CDATA[
-    Copy Selection Reference - IntelliJ Plugin
+    <p>Copy Code Pointers is an IntelliJ plugin that copies precise file references with line and column numbers to your clipboard. Great for working with AI code tools</p>
 
-    This IntelliJ plugin copies a file reference with line numbers to the clipboard for selected text.
-    Perfect for sharing code locations with team members or referencing specific lines in documentation.
-    Compatible with IntelliJ IDEA and WebStorm.
-
-    Features:
-    - Configurable path reference modes (Project Root, Git Root, Absolute Path)
-    - Optional column number inclusion
-    - Works with any file type
-    - Simple and intuitive interface
+    <p><b>Example Output:</b></p>
+    <ul>
+      <li>Single line: <code>src/main/MyClass.java:5</code></li>
+      <li>Line range: <code>src/main/MyClass.java:4-10</code></li>
+      <li>With columns: <code>src/main/MyClass.java:5:10-25</code></li>
+    </ul>
   ]]></description>
   <change-notes><![CDATA[
-    Version 1.3.0:
-    - Added configurable path reference modes (Project Root, Git Root, Absolute Path)
-    - Added option to include/exclude column numbers
-    - Added settings UI accessible through File > Settings > Code Pointers
-    - Improved path resolution for git repositories
-    - Enhanced reference format flexibility
+
   ]]></change-notes>
   <depends>com.intellij.modules.platform</depends>
 

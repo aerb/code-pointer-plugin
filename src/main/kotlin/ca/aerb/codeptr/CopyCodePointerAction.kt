@@ -18,12 +18,10 @@ class CopyCodePointerAction : AnAction() {
     val selectionModel = editor.selectionModel
     val startOffset: Int
     val endOffset: Int
-
     if (selectionModel.hasSelection()) {
       startOffset = selectionModel.selectionStart
       endOffset = selectionModel.selectionEnd
     } else {
-      // No selection, use cursor position
       startOffset = editor.caretModel.offset
       endOffset = startOffset
     }
@@ -32,21 +30,17 @@ class CopyCodePointerAction : AnAction() {
     val startLine = document.getLineNumber(startOffset) + 1
     val endLine = document.getLineNumber(endOffset) + 1
 
-    // Calculate column positions
     val startLineStartOffset = document.getLineStartOffset(startLine - 1)
     val endLineStartOffset = document.getLineStartOffset(endLine - 1)
     val startColumn = startOffset - startLineStartOffset + 1 // Convert to 1-based
     val endColumn = endOffset - endLineStartOffset + 1 // Convert to 1-based
 
-    // Get settings
     val settings = CodePointerSettingsState.getInstance()
-    val pathReferenceMode = settings.getPathReferenceMode()
-    val includeColumnNumbers = settings.getIncludeColumnNumbers()
+    val pathReferenceMode = settings.pathReferenceMode
+    val includeColumnNumbers = settings.includeColumnNumbers
 
-    // Resolve file path based on settings
     val filePath = PathResolver.resolvePath(project, virtualFile, pathReferenceMode)
 
-    // Generate reference based on settings
     val reference =
         generateReference(
             filePath, startLine, endLine, startColumn, endColumn, includeColumnNumbers)
@@ -66,13 +60,9 @@ class CopyCodePointerAction : AnAction() {
     return when {
       startLine == endLine && (!includeColumnNumbers || startColumn == endColumn) -> {
         // Single position without columns or same column
-        if (includeColumnNumbers && startColumn != endColumn) {
-          "$filePath:$startLine:$startColumn-$endColumn"
-        } else {
-          "$filePath:$startLine"
-        }
+        "$filePath:$startLine"
       }
-      startLine == endLine && includeColumnNumbers -> {
+      startLine == endLine -> {
         // Same line, different columns
         "$filePath:$startLine:$startColumn-$endColumn"
       }

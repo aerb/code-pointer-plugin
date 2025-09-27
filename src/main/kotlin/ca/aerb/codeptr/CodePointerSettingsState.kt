@@ -8,15 +8,15 @@ import com.intellij.openapi.components.*
  * modes and other configuration options.
  */
 @State(
-    name = "CodePointerSettings",
-    storages = [Storage("code-pointer-settings.xml")],
+  name = "CodePointerSettings",
+  storages = [Storage("code-pointer-settings.xml")],
 )
 @Service
 class CodePointerSettingsState : PersistentStateComponent<CodePointerSettingsState.State> {
   data class State(
-      var pathReferenceMode: PathReferenceMode = PathReferenceMode.PROJECT_ROOT,
-      var includeColumnNumbers: Boolean = true,
-      var showPreviewInTooltip: Boolean = true,
+    var pathReferenceMode: PathReferenceMode = PathReferenceMode.PROJECT_ROOT,
+    var includeColumnNumbers: Boolean = true,
+    var showPreviewInTooltip: Boolean = true,
   )
 
   private var state = State()
@@ -33,22 +33,21 @@ class CodePointerSettingsState : PersistentStateComponent<CodePointerSettingsSta
     }
   }
 
-  // Convenience methods for accessing settings
-  fun getPathReferenceMode(): PathReferenceMode = state.pathReferenceMode
+  var pathReferenceMode: PathReferenceMode
+    get() = state.pathReferenceMode
+    set(mode) {
+      state.pathReferenceMode = mode
+    }
 
-  fun setPathReferenceMode(mode: PathReferenceMode) {
-    state.pathReferenceMode = mode
-  }
+  var includeColumnNumbers: Boolean
+    get() = state.includeColumnNumbers
+    set(include) {
+      state.includeColumnNumbers = include
+    }
 
-  fun getIncludeColumnNumbers(): Boolean = state.includeColumnNumbers
-
-  fun setIncludeColumnNumbers(include: Boolean) {
-    state.includeColumnNumbers = include
-  }
-
-  fun getShowPreviewInTooltip(): Boolean = state.showPreviewInTooltip
-
-  fun setShowPreviewInTooltip(show: Boolean) {
-    state.showPreviewInTooltip = show
-  }
+  var showPreviewInTooltip: Boolean
+    get() = state.showPreviewInTooltip
+    set(show) {
+      state.showPreviewInTooltip = show
+    }
 }

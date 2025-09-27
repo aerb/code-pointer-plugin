@@ -12,9 +12,9 @@ repositories {
 
 dependencies { intellijPlatform { intellijIdeaCommunity("2025.2.2") } }
 
-group = "com.example"
+group = "ca.aerb"
 
-version = "1.2.0"
+version = "0.5.0"
 
 repositories {
   mavenCentral()
